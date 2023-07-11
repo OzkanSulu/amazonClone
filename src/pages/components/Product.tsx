@@ -1,6 +1,8 @@
 import React from 'react'
 import { ProductProps } from '@/type'
 import Image from 'next/image'
+import { HiShoppingCart } from 'react-icons/hi'
+import {FaHeart} from "react-icons/fa"
 
 const Product = ({productData}:any) => {
   return (
@@ -8,9 +10,38 @@ const Product = ({productData}:any) => {
       {
         productData.map((item)=>{
           return(
-            <div key={item.id} className='border border-white-300 rounded-lg gap-3'>
-              <div >
-                <Image src={item.image} width={300} height={300} alt='item'/>
+            <div key={item.id} className='border border-white-300 rounded-lg group overflow-hidden relative bg-white gap-3'>
+              <div className='w-100 h-[360px] relative bg-white'>
+                <Image className='w-full h-full scale-90 hover:scale-100 transition-transform duration-200s' src={item.image} width={300} height={300} alt='item'/>
+              </div>
+              <hr/>
+              <div className='w-12 h-24 absolute bottom-40 right-0 border-[2px] flex flex-col justify-center gap-3 items-center  bg-transparent border-amazon_blue translate-x-20 group-hover:translate-x-0 transition-transform duration-300'>
+                <div className='border-b-2 border-b-amazon_blue'>
+                <span> <HiShoppingCart className='text-amazon_blue cursor-pointer text-lg'/></span>
+                </div>
+                
+                <div>
+                <span>  <FaHeart className='text-amazon_blue cursor-pointer text-lg'/></span>
+                </div>
+              </div>
+              <div className='px-4 py-3 flex flex-col gap-1'>
+                <p className='text-xs text-amazon_blue tracking-wide'>{item.category}</p>
+                <p className='text-base font-medium'>{item.title}</p>
+                <div className='flex gap-2'>
+                  <span className='line-through text-sm text-gray-400'>${item.oldPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <span className='text-amazon_blue font-semibold'>${item.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+
+                </div>
+                <div>
+                  <p className='text-xs text-gray-500 flex text-justify'>{item.description.substring(0,120)}</p>
+                </div>
+                <button className='h-10 bg-amazon_blue text-white mt-3 rounded-sm hover:bg-amazon_yellow hover:text-white duration-300'>add to cart</button>
+              </div>
+              <div>
+              {item.isNew && (
+  <p className='text-sm absolute top-3 right-1 animate-bounce font-semibold text-amazon_blue'>Save ${`${(item.oldPrice - item.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</p>
+)}
+
               </div>
               </div>
           )

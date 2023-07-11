@@ -40,7 +40,7 @@ const Header = () => {
             </p>
           </div>
         </div>
-        <div className="text-xs p-3 text-gray-100 flex flex-col justify-center items-center cursor-pointer border border-transparent hover:border-white duration-300 cursor-pointer h-100%">
+        <div className="text-xs p-3 text-gray-100 flex flex-col justify-center items-center border border-transparent hover:border-white duration-300 cursor-pointer h-100%">
           <p>Marked</p>
           <p className="text-white font-bold">& Favorites</p>
         </div>
