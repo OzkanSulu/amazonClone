@@ -1,10 +1,13 @@
 import React from 'react'
-import { ProductProps } from '@/type'
 import Image from 'next/image'
 import { HiShoppingCart } from 'react-icons/hi'
 import {FaHeart} from "react-icons/fa"
+import { useDispatch } from 'react-redux'
+import { addCart } from '@/store/nextSlice'
 
 const Product = ({productData}:any) => {
+  const dispatch = useDispatch();
+
   return (
     <div className='w-full px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
       {
@@ -15,13 +18,13 @@ const Product = ({productData}:any) => {
                 <Image className='w-full h-full scale-90 hover:scale-100 transition-transform duration-200s' src={item.image} width={300} height={300} alt='item'/>
               </div>
               <hr/>
-              <div className='w-12 h-24 absolute bottom-40 right-0 border-[2px] flex flex-col justify-center gap-3 items-center  bg-transparent border-amazon_blue translate-x-20 group-hover:translate-x-0 transition-transform duration-300'>
-                <div className='border-b-2 border-b-amazon_blue'>
-                <span> <HiShoppingCart className='text-amazon_blue cursor-pointer text-lg'/></span>
+              <div className='w-12 h-24 absolute bottom-40 right-0 border-[2px] flex flex-col justify-center gap-3 items-center  bg-transparent border-amazon_yellow translate-x-20 group-hover:translate-x-0 transition-transform duration-300'>
+                <div>
+                <span> <HiShoppingCart className='text-amazon_blue cursor-pointer text-lg  hover:text-amazon_yellow'/></span>
                 </div>
                 
                 <div>
-                <span>  <FaHeart className='text-amazon_blue cursor-pointer text-lg'/></span>
+                <span>  <FaHeart className='text-amazon_blue cursor-pointer text-lg hover:text-amazon_yellow'/></span>
                 </div>
               </div>
               <div className='px-4 py-3 flex flex-col gap-1'>
@@ -35,7 +38,18 @@ const Product = ({productData}:any) => {
                 <div>
                   <p className='text-xs text-gray-500 flex text-justify'>{item.description.substring(0,120)}</p>
                 </div>
-                <button className='h-10 bg-amazon_blue text-white mt-3 rounded-sm hover:bg-amazon_yellow hover:text-white duration-300'>add to cart</button>
+                <button onClick={()=>dispatch(addCart({
+                  _id:item._id,
+                  brand:item.brand,
+                  category:item.category,
+                  image:item.image,
+                  description:item.description,
+                  isNew:item.isNew,
+                  oldPrice:item.oldPrice,
+                  price:item.price,
+                  title:item.title,
+                  quantity:1,
+                }))} className='h-10 bg-amazon_blue text-white mt-3 rounded-sm hover:bg-amazon_yellow hover:text-white duration-300'>add to cart</button>
               </div>
               <div>
               {item.isNew && (
