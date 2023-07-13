@@ -2,7 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { LuMinus, LuPlus, LuTrash2 } from "react-icons/lu";
 import { useDispatch } from "react-redux";
-import { decreaseQuantity, increaseQuantity } from "@/store/nextSlice";
+import {
+  decreaseQuantity,
+  deleteProduct,
+  increaseQuantity,
+} from "@/store/nextSlice";
 
 interface Item {
   brand: string;
@@ -49,17 +53,53 @@ function CartProducts({ item }: CartProductsProps) {
           <div className="flex items-center gap-6">
             <div className="flex justify-between items-center w-28 rounded-full px-4 py-1 border border-gray-300 shadow-lg shadow-gray-300 mt-1">
               <span
-               
+                onClick={() =>
+                  dispatch(
+                    decreaseQuantity({
+                      brand: item.brand,
+                      category: item.category,
+                      description: item.description,
+                      image: item.image,
+                      isNew: item.isNew,
+                      oldPrice: item.oldPrice,
+                      price: item.price,
+                      title: item.title,
+                      _id: item._id,
+                      quantit: item.quantity,
+                    })
+                  )
+                }
                 className="cursor-pointer border border-transparent duration-200 hover:rounded-full hover:bg-red-400 hover:text-white"
               >
                 <LuMinus />
               </span>
               <span>{item.quantity}</span>
-              <span  className="cursor-pointer border border-transparent duration-200 hover:rounded-full hover:bg-green-400 hover:text-white">
+              <span
+                onClick={() =>
+                  dispatch(
+                    increaseQuantity({
+                      brand: item.brand,
+                      category: item.category,
+                      description: item.description,
+                      image: item.image,
+                      isNew: item.isNew,
+                      oldPrice: item.oldPrice,
+                      price: item.price,
+                      title: item.title,
+                      _id: item._id,
+                      quantit: item.quantity,
+                    })
+                  )
+                }
+                className="cursor-pointer border border-transparent duration-200 hover:rounded-full hover:bg-green-400 hover:text-white"
+              >
                 <LuPlus />
               </span>
             </div>
-            <span className="text-red-400 cursor-pointer hover:scale-105 duration-300">
+            <span
+              onClick={() => dispatch(deleteProduct(item._id))}
+              className="text-red-400 cursor-pointer hover:scale-105 duration-300"
+            >
               <LuTrash2 />
             </span>
           </div>

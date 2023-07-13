@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { StateProps, StoreProduct } from '@/type'
 import CartProducts from './components/CartProducts'
+import ResetCart from './components/ResetCart'
+import Link from 'next/link'
 
 
 
@@ -10,7 +12,7 @@ const Cart = () => {
   console.log({productData})
   return (
     
-    <div className='max-w-screen-2xl mx-auto px-6 grid grid-cols-5 gap-10 py-4'>
+    <div className='min-h-[81vh] max-w-screen-2xl mx-auto px-6 grid grid-cols-5 gap-10 py-4'>
       {
       productData.length>0?(
        
@@ -31,12 +33,14 @@ const Cart = () => {
                 <div key={item._id} className='pt-2 gap-2 flex flex-col'>
                   <CartProducts item={item}/>
                 </div>
+                
               ))}
+              <ResetCart/>
             </div>
         </div>
-      ):(<div>
+      ):(<div className='bg-white col-span-5 flex gap-6 flex-col rounded-sm justify-center items-center h-80'>
         Empty Cart!
-        <button>Go to shopping</button>
+        <Link className='text-lg text-amazon_yellow px-4 flex justify-center items-center h-12 text-semibold border-[2px] border-amazon_yellow' href="/">Go to shopping</Link>
       </div>)
       }
     </div>

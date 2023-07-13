@@ -53,22 +53,20 @@ export const nextSlice = createSlice({
     },
     decreaseQuantity:(state,action)=>{
       const existingProduct = state.productData.find(
-        (item:StoreProduct)=>{
+        (item:StoreProduct)=>
           item._id===action.payload._id
-        }
+        
       );
-      if(existingProduct?.quantity===1){
-        existingProduct.quantity=1
-
+      if (existingProduct?.quantity===1) {
+        existingProduct.quantity=1;
       }else{
         existingProduct!.quantity--;
       }
+      
     },
     deleteProduct:(state,action)=>{
       state.productData=state.productData.filter(
-        (item:StoreProduct)=>{
-          item._id!==action.payload
-        }
+        item =>item._id!==action.payload
       )
     },
     resetCart:(state)=>{
