@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { HiShoppingCart } from 'react-icons/hi'
 import {FaHeart} from "react-icons/fa"
 import { useDispatch } from 'react-redux'
-import { addCart } from '@/store/nextSlice'
+import { addCart, addFavorite } from '@/store/nextSlice'
 
 const Product = ({productData}:any) => {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Product = ({productData}:any) => {
   return (
     <div className='w-full px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
       {
-        productData.map((item)=>{
+        productData.map((item:any)=>{
           return(
             <div key={item.id} className='border border-white-300 rounded-lg group overflow-hidden relative bg-white gap-3'>
               <div className='w-100 h-[360px] relative bg-white'>
@@ -35,7 +35,18 @@ const Product = ({productData}:any) => {
                 </div>
                 
                 <div>
-                <span>  <FaHeart className='text-amazon_blue cursor-pointer text-lg hover:text-amazon_yellow'/></span>
+                <span onClick={()=>dispatch(addFavorite({
+                  _id:item._id,
+                  brand:item.brand,
+                  category:item.category,
+                  image:item.image,
+                  description:item.description,
+                  isNew:item.isNew,
+                  oldPrice:item.oldPrice,
+                  price:item.price,
+                  title:item.title,
+                  quantity:1,
+                }))}>  <FaHeart className='text-amazon_blue cursor-pointer text-lg hover:text-amazon_yellow'/></span>
                 </div>
               </div>
               <div className='px-4 py-3 flex flex-col gap-1'>

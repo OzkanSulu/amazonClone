@@ -8,7 +8,7 @@ export interface StoreProduct{
     price:number;
     title:string;
     _id:number;
-    quantity:1,
+    quantity:number,
 }
 
 export interface ProductProps{

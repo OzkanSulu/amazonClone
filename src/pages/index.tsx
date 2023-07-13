@@ -7,7 +7,7 @@ interface Props{
 }
 
 export default function Home({productData}:Props) {
-  console.log(productData);
+  //console.log(productData);
   return (
     <main className="bg-gray-300">
       

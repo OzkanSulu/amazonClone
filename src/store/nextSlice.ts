@@ -43,7 +43,7 @@ export const nextSlice = createSlice({
       }
     },
     increaseQuantity:(state,action)=>{
-      const existingProduct=state.favoriteData.find(
+      const existingProduct=state.productData.find(
         (item:StoreProduct)=> item._id === action.payload._id
         
       );
@@ -52,7 +52,7 @@ export const nextSlice = createSlice({
       }
     },
     decreaseQuantity:(state,action)=>{
-      const existingProduct = state.favoriteData.find(
+      const existingProduct = state.productData.find(
         (item:StoreProduct)=>{
           item._id===action.payload._id
         }
