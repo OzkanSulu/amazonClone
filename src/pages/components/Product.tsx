@@ -20,7 +20,18 @@ const Product = ({productData}:any) => {
               <hr/>
               <div className='w-12 h-24 absolute bottom-40 right-0 border-[2px] flex flex-col justify-center gap-3 items-center  bg-transparent border-amazon_yellow translate-x-20 group-hover:translate-x-0 transition-transform duration-300'>
                 <div>
-                <span> <HiShoppingCart className='text-amazon_blue cursor-pointer text-lg  hover:text-amazon_yellow'/></span>
+                <span onClick={()=>dispatch(addCart({
+                  _id:item._id,
+                  brand:item.brand,
+                  category:item.category,
+                  image:item.image,
+                  description:item.description,
+                  isNew:item.isNew,
+                  oldPrice:item.oldPrice,
+                  price:item.price,
+                  title:item.title,
+                  quantity:1,
+                }))}> <HiShoppingCart className='text-amazon_blue cursor-pointer text-lg  hover:text-amazon_yellow'/></span>
                 </div>
                 
                 <div>

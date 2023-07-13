@@ -23,3 +23,10 @@ export interface ProductProps{
     _id:number;
     quantit:1,
 }
+
+export interface StateProps{
+    productData:[],
+    favoriteData:[],
+    userInfo: null | string,
+    next:any,
+}
