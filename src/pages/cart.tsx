@@ -8,8 +8,8 @@ import Link from 'next/link'
 
 
 const Cart = () => {
-  const {productData,favoriteData} = useSelector((state:StateProps)=>state.next)
-  console.log({productData})
+  const {productData} = useSelector((state:StateProps)=>state.next)
+
   return (
     
     <div className='min-h-[81vh] max-w-screen-2xl mx-auto px-6 grid grid-cols-5 gap-10 py-4'>

@@ -69,6 +69,11 @@ export const nextSlice = createSlice({
         item =>item._id!==action.payload
       )
     },
+    deleteFavorite:(state,action)=>{
+      state.favoriteData=state.favoriteData.filter(
+        (item:StoreProduct)=>item._id!==action.payload._id
+      )
+    },
     resetCart:(state)=>{
       state.productData=[]
     },
@@ -86,6 +91,6 @@ export const nextSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addCart, addFavorite, increaseQuantity,decreaseQuantity,deleteProduct,resetCart,addUser,removeUser,setAllProducts } = nextSlice.actions;
+export const { addCart, addFavorite, deleteFavorite,increaseQuantity,decreaseQuantity,deleteProduct,resetCart,addUser,removeUser,setAllProducts } = nextSlice.actions;
 
 export default nextSlice.reducer;

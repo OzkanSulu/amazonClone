@@ -44,10 +44,19 @@ const Header = () => {
           </div>
         </div>
         <div className="text-xs p-3 text-gray-100 flex flex-col justify-center items-center border border-transparent relative hover:border-white duration-300 cursor-pointer h-100%">
-          <p>Marked</p>
-          <p className="text-white font-bold">& Favorites</p>
-          {favoriteData.length>0 && <span className="absolute right-1 top-3 w-4 h-4 border-[1px] rounded-sm border-gray-400 text-amazon_yellow flex item-center justify-center">{favoriteData.length}</span>}
-        </div>
+        <Link href="/favorites">
+   
+      <p>Marked</p>
+      <p className="text-white font-bold">& Favorites</p>
+      {favoriteData.length > 0 && (
+        <span className="absolute right-1 top-3 w-4 h-4 border-[1px] rounded-sm border-gray-400 text-amazon_yellow flex item-center justify-center">
+          {favoriteData.length}
+        </span>
+      )}
+    
+  </Link>
+</div>
+
         <div className="h-[70%] flex justify-center items-center cursor-pointer px-4 py-3 border border-transparent hover:border-white relative">
           <Link href={"/cart"}><Image className="w-12 h-full object-contain" src={cart} alt="cart"/></Link>
           <span className="text-sm  absolute left-10 top-1 font-bold  text-amazon_yellow">{productData? productData.length :0}</span>
