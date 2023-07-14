@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import logo from "../../../images/logo.png";
 import cart from "../../../images/cartIcon.png";
@@ -7,10 +7,26 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlLocationPin } from "react-icons/sl";
 import Link from "next/link";
 import { StateProps } from "@/type";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { addUser } from "@/store/nextSlice";
+
 
 const Header = () => {
   const {productData,favoriteData} = useSelector((state : StateProps)=>state.next)
+  const { data: session, status } = useSession()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    if(session){
+      dispatch(addUser({
+        name:session?.user?.name,
+        email:session?.user?.email,
+        Image:session?.user?.image
+      }))
+    }}
+  ,[session])
+
   return (
     <div className="w-full h-20 bg-amazon_blue text-lightText sticky top-0 z-50">
       <div className="h-full w-full mx-auto inline-flex items-center justify-between gap-1 mdl:gap-3 px-6">
@@ -32,7 +48,7 @@ const Header = () => {
             <HiOutlineSearch />
           </span>
         </div>
-        <div className="text-xs p-3 text-gray-100 flex flex-col justify-center items-center border border-transparent hover:border-white duration-300 cursor-pointer h-100%">
+        <div onClick={()=>signIn()} className="text-xs p-3 text-gray-100 flex flex-col justify-center items-center border border-transparent hover:border-white duration-300 cursor-pointer h-100%">
           <p>Hello, Sign In</p>
           <div className="text-white font-bold">
             <p>
